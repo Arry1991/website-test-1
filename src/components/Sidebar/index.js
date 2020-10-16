@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   SidebarContainer,
   Icon,
@@ -7,8 +7,9 @@ import {
   SidebarMenu,
   SidebarLink,
   SidebarRoute,
-  SideBtnWrap
-} from './SidebarElements';
+  SideBtnWrap,
+  SidebarMenuItem,
+} from "./SidebarElements";
 
 const Sidebar = ({ isOpen, toggle }) => {
   return (
@@ -18,10 +19,20 @@ const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to='about' onClick={toggle}> About</SidebarLink>
-          <SidebarLink to='discover' onClick={toggle}>Discover</SidebarLink>
-          <SidebarLink to='services' onClick={toggle}>Services</SidebarLink>
-          <SidebarLink to='/Register' onClick={toggle}> Sign Up </SidebarLink>
+          <SidebarLink to='about' onClick={toggle}>
+            {" "}
+            About
+          </SidebarLink>
+          <SidebarLink to='discover' onClick={toggle}>
+            Discover
+          </SidebarLink>
+          <SidebarLink to='services' onClick={toggle}>
+            Services
+          </SidebarLink>
+          <SidebarMenuItem to='/Register' onClick={toggle}>
+            {" "}
+            Sign Up{" "}
+          </SidebarMenuItem>
         </SidebarMenu>
         <SideBtnWrap>
           <SidebarRoute to='/Login'>Sign In</SidebarRoute>
