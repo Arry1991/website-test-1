@@ -24,7 +24,7 @@ const Login = (props) => {
         email: String(FormData.email),
         password: String(FormData.password),
       })
-      // if login details sucessful make auth true and save cookie
+      // if login details sucessful make auth true and save cookieafafs
       .then((res) => {
         console.log(res);
         props.authHandler(true);
