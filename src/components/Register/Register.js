@@ -32,7 +32,7 @@ const Register = (props) => {
     console.log("clicked");
     axios
       .post(URL, {
-        //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK)
+        //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
         firstName: String(FormData.firstName),
         lastName: String(FormData.lastName),
         email: String(FormData.email),
