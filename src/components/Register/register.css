@@ -1,0 +1,13 @@
+.form {
+  max-width: 50%;
+  margin: auto;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+h1{
+    font-weight: bold;
+    text-align: center;
+}
