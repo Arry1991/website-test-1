@@ -22,8 +22,9 @@ function App() {
     if (Cookies.get("Token") !== undefined) {
       console.log("token is here");
       // Send to back end for verification
+      const url = "/react-backend/";
       axios
-        .put(URL, Cookies.get("Token")) //URL FROM BACKEND - Token Verification route needed
+        .put(url, Cookies.get("Token")) //URL FROM BACKEND - Token Verification route needed
         // If back end send a succefful response make auth true granting access
         .then((res) => {
           setAuth(true);
@@ -31,7 +32,7 @@ function App() {
         // if backend send fail change auth to false
         .catch((err) => {
           console.log(err);
-          setAuth(true); //CHANGE TO FALSE
+          setAuth(false); //CHANGE TO FALSE
         });
     }
   }, []);

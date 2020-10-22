@@ -16,25 +16,25 @@ const Login = (props) => {
   };
   // On form submit run this function
   const registerHandler = () => {
+    let formData2 = new FormData();
+    formData2.append("email", formData.email);
     console.log("clicked");
+
     // send login details to database
+    const url = "/react-backend/";
     axios
-      .post(URL, {
-        // HERE URL WILL EQUAL BACKEND API LINK (POST API LINK)
-        email: String(FormData.email),
-        password: String(FormData.password),
-      })
+      .post(url, formData2)
       // if login details sucessful make auth true and save cookieafafs
       .then((res) => {
         console.log(res);
         props.authHandler(true);
-        Cookies.set("Token", res.data.token, { expires: 7 });
+        //Cookies.set("Token", res.data.token, { expires: 7 });
       })
       // if login failed do nothing
       .catch((err) => {
         console.log(err);
-        props.authHandler(true); //REMOVE LATER
-        Cookies.set("Token", "8s6d9a87s98d69s7atd9sa7d9", { expires: 7 }); //REMOVE LATER
+        //props.authHandler(true); //REMOVE LATER
+        // Cookies.set("Token", "8s6d9a87s98d69s7atd9sa7d9", { expires: 7 }); //REMOVE LATER
       });
   };
   return (

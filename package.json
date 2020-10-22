@@ -2,6 +2,7 @@
   "name": "website-test",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:80",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -9,6 +10,7 @@
     "availity-reactstrap-validation": "^2.6.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.3",
+    "cors": "^2.8.5",
     "git": "^0.1.5",
     "js-cookie": "^2.2.1",
     "react": "^16.13.1",
@@ -16,13 +18,14 @@
     "react-icons": "^3.11.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^3.4.4",
     "react-scroll": "^1.8.1",
     "react-side-bar": "^1.0.4",
     "react-sidenav": "^4.0.6",
     "reactstrap": "^8.6.0",
     "styled-components": "^5.2.0"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
