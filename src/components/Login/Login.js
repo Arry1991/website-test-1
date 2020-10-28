@@ -18,10 +18,11 @@ const Login = (props) => {
   const registerHandler = () => {
     let formData2 = new FormData();
     formData2.append("email", formData.email);
+    formData2.append("password", formData.password);
     console.log("clicked");
 
     // send login details to database
-    const url = "/react-backend/";
+    const url = "/react-backend/verificationLogin.php";
     axios
       .post(url, formData2)
       // if login details sucessful make auth true and save cookieafafs

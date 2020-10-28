@@ -10,14 +10,15 @@ import {
   ModalFooter,
 } from "reactstrap";
 import axios from "axios";
-import "./register.css";
+import "./business.css";
 
-const Register = (props) => {
+const Business = (props) => {
   const [formData, setFormdata] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    date: "",
+    temp: "",
   });
   const [modal, setModal] = useState(false);
 
@@ -33,18 +34,20 @@ const Register = (props) => {
     formData2.append("firstName", formData.firstName);
     formData2.append("lastName", formData.lastName);
     formData2.append("email", formData.email);
-    formData2.append("password", formData.password);
+    formData2.append("date", formData.date);
+    formData2.append("temp", formData.temp);
     console.log("clicked");
+
     const url = "/react-backend/registration.php";
     axios
 
-      .post(url, formData2)
+      .post(URL, formData2)
       //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
-      // firstName: String(FormData.firstName),
-      // lastName: String(FormData.lastName),
-      // email: String(FormData.email),
-      // password: String(FormData.password),
-      // })
+      //  firstName: String(FormData.firstName),
+      //  lastName: String(FormData.lastName),
+      //  email: String(FormData.email),
+      //  password: String(FormData.password),
+      //})
       .then((res) => {
         console.log(res);
         setMessage("Successful");
@@ -58,7 +61,7 @@ const Register = (props) => {
   };
   return (
     <>
-      <h1>Register</h1>
+      <h1>Sign in patrons</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
@@ -89,9 +92,18 @@ const Register = (props) => {
             required
           />
           <AvField
-            type='password'
-            name='password'
-            label='Password'
+            type='date'
+            name='date'
+            label='Date'
+            onChange={(e) => {
+              onChange(e);
+            }}
+            required
+          />
+          <AvField
+            label='Temperature'
+            type='text'
+            name='temp'
             onChange={(e) => {
               onChange(e);
             }}
@@ -106,4 +118,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default Business;

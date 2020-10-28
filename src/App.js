@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Cookies from "js-cookie";
 import Home from "./pages";
 import Register from "./components/Register/Register";
+import Business from "./components/Business/Business";
 import Login from "./components/Login/Login";
 import axios from "axios";
 
@@ -63,11 +64,12 @@ function App() {
       <Navbar toggle={toggle} />
       <Switch>
         <Route exact path='/' component={Home} />
-        <PrivateRoute exact path='/Register' component={Register} auth={auth} />
-        <Route exact path='/Register' component={Register} />
+        <PrivateRoute exact path='/Business' component={Business} auth={auth} />
+        <Route exact path='/Business' component={Business} />
         <Route exact path='/Login'>
           <Login authHandler={handleAuth} />
         </Route>
+        <Route exact path='/Register' component={Register}></Route>
         {/* <Route exact path='/Login' component={Login} x={handleAuth} />  */}
       </Switch>
     </Router>
