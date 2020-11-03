@@ -14,12 +14,15 @@ import "./business.css";
 
 const Business = (props) => {
   const [formData, setFormdata] = useState({
+    businessEmail: "",
     firstName: "",
     lastName: "",
     email: "",
     date: "",
     temp: "",
+    dateOfCase: ""
   });
+
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -31,6 +34,7 @@ const Business = (props) => {
   };
   const registerHandler = () => {
     let formData2 = new FormData();
+    formData2.append("businessEmail", formData.businessEmail);
     formData2.append("firstName", formData.firstName);
     formData2.append("lastName", formData.lastName);
     formData2.append("email", formData.email);
@@ -59,11 +63,48 @@ const Business = (props) => {
         toggle();
       });
   };
+
+  const registerHandler2 = () => {
+    let formData3 = new FormData();
+    formData3.append("DateOfCase", formData.dateOfCase);
+    console.log("clicked")
+
+    const url = "/react-backend/registration.php";
+    axios
+
+      .post(URL, formData3)
+      //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
+      //  firstName: String(FormData.firstName),
+      //  lastName: String(FormData.lastName),
+      //  email: String(FormData.email),
+      //  password: String(FormData.password),
+      //})
+      .then((res) => {
+        console.log(res);
+        setMessage("Successful");
+        toggle();
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage("Failed");
+        toggle();
+      });
+  };
+
   return (
     <>
       <h1>Sign in patrons</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
+          <AvField
+            label='Business Email'
+            type='text'
+            name='businessEmail'
+            onChange={(e) => {
+              onChange(e);
+            }}
+            required
+          />
           <AvField
             label='First Name'
             type='text'
@@ -112,6 +153,21 @@ const Business = (props) => {
         </FormGroup>
         <FormGroup>
           <Button>Submit</Button>
+        </FormGroup>
+      </AvForm>
+      <AvForm className='form' onValidSubmit={registerHandler2}>
+        <FormGroup>
+          <AvField
+            label='Date of Reported Case'
+            type='date'
+            name='DateOfCase'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Button>Report</Button>
         </FormGroup>
       </AvForm>
     </>
