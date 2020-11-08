@@ -3,7 +3,9 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button, FormGroup, Label } from "reactstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 import "./login.css";
+import { Router } from "react-router-dom";
 
 const Login = (props) => {
   const [formData, setFormdata] = useState({

@@ -28,7 +28,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           </SidebarLink>
           <SidebarMenuItem to='/Business' onClick={toggle}>
             {" "}
-            Business{" "}
+            Check-In{" "}
           </SidebarMenuItem>
           <SidebarMenuItem to='/Register' onClick={toggle}>
             {" "}

@@ -20,7 +20,7 @@ const Business = (props) => {
     email: "",
     date: "",
     temp: "",
-    dateOfCase: ""
+    dateOfCase: "",
   });
 
   const [modal, setModal] = useState(false);
@@ -42,10 +42,10 @@ const Business = (props) => {
     formData2.append("temp", formData.temp);
     console.log("clicked");
 
-    const url = "/react-backend/registration.php";
+    const url = "/react-backend/patron.php";
     axios
 
-      .post(URL, formData2)
+      .post(url, formData2)
       //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
       //  firstName: String(FormData.firstName),
       //  lastName: String(FormData.lastName),
@@ -66,13 +66,14 @@ const Business = (props) => {
 
   const registerHandler2 = () => {
     let formData3 = new FormData();
-    formData3.append("DateOfCase", formData.dateOfCase);
-    console.log("clicked")
+    formData3.append("businessEmail", formData.businessEmail);
+    formData3.append("dateOfCase", formData.dateOfCase);
+    console.log("clicked");
 
-    const url = "/react-backend/registration.php";
+    const url2 = "/react-backend/notification.php";
     axios
 
-      .post(URL, formData3)
+      .post(url2, formData3)
       //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
       //  firstName: String(FormData.firstName),
       //  lastName: String(FormData.lastName),
@@ -160,7 +161,7 @@ const Business = (props) => {
           <AvField
             label='Date of Reported Case'
             type='date'
-            name='DateOfCase'
+            name='dateOfCase'
             onChange={(e) => {
               onChange(e);
             }}
