@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import { Link } from "react-router-dom";
 import {
   Button,
   FormGroup,
   Label,
+  Input,
   Modal,
   ModalHeader,
   ModalBody,
@@ -18,6 +20,15 @@ const Register = (props) => {
     lastName: "",
     email: "",
     password: "",
+    name: "",
+    businessType: "",
+    BEmail: "",
+    phone: "",
+    url: "",
+    street: "",
+    town: "",
+    zip: "",
+    county: "",
   });
   const [modal, setModal] = useState(false);
 
@@ -30,12 +41,26 @@ const Register = (props) => {
   };
   const registerHandler = () => {
     let formData2 = new FormData();
+    let formData3 = new FormData();
     formData2.append("firstName", formData.firstName);
     formData2.append("lastName", formData.lastName);
     formData2.append("email", formData.email);
     formData2.append("password", formData.password);
+
+    formData3.append("ownerEmail", formData.email);
+    formData3.append("name", formData.name);
+    formData3.append("businessType", formData.businessType);
+    formData3.append("BEmail", formData.BEmail);
+    formData3.append("phone", formData.phone);
+    formData3.append("url", formData.url);
+    formData3.append("street", formData.street);
+    formData3.append("town", formData.town);
+    formData3.append("zip", formData.zip);
+    formData3.append("county", formData.county);
+
     console.log("clicked");
     const url = "/react-backend/registration.php";
+    const url2 = "/react-backend/business.php";
     axios
 
       .post(url, formData2)
@@ -55,7 +80,26 @@ const Register = (props) => {
         setMessage("Failed");
         toggle();
       });
+    axios
+      .post(url2, formData3)
+      //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
+      // firstName: String(FormData.firstName),
+      // lastName: String(FormData.lastName),
+      // email: String(FormData.email),
+      // password: String(FormData.password),
+      // })
+      .then((res) => {
+        console.log(res);
+        setMessage("Successful");
+        toggle();
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage("Failed");
+        toggle();
+      });
   };
+
   return (
     <>
       <h1>Register</h1>
@@ -80,7 +124,7 @@ const Register = (props) => {
             required
           />
           <AvField
-            label='Email'
+            label='Owner Email'
             type='email'
             name='email'
             onChange={(e) => {
@@ -97,7 +141,179 @@ const Register = (props) => {
             }}
             required
           />
+          <AvField
+            label='Business Name'
+            type='text'
+            name='name'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          <Label>Business Type</Label>
+          <Input
+            type='select'
+            name='businessType'
+            id='businessType'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          >
+            <option>Select an option</option>
+            <option>Restaurant</option>
+            <option>Retail</option>
+            <option>Banking/Finance</option>
+            <option>Auto Sales/Services</option>
+            <option>Medical Office</option>
+            <option>Daycare</option>
+            <option>Construction</option>
+            <option>Sports/Recreation</option>
+            <option>Other</option>
+          </Input>
+
+          <AvField
+            label='Business Email'
+            type='email'
+            name='BEmail'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          <AvField
+            label='Phone Number'
+            type='phone'
+            name='phone'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          <AvField
+            label='URL'
+            type='url'
+            name='url'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+          <AvField
+            label='Street Address'
+            type='address'
+            name='street'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          <AvField
+            label='Town'
+            type='text'
+            name='town'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          <AvField
+            label='ZIP'
+            type='text'
+            name='zip'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+
+          {/* List of Cunties. To-Do: Hide this data in another file/make a helper function */}
+          <Label>County</Label>
+          <Input
+            type='select'
+            name='county'
+            id='county'
+            onChange={(e) => {
+              onChange(e);
+            }}
+          >
+            <option>Select the option</option>
+            <option>Albany</option>
+            <option>Allegany</option>
+            <option>Bronx</option>
+            <option>Broome</option>
+            <option>Cattaraugus</option>
+            <option>Cayuga</option>
+            <option>Chautauqua</option>
+            <option>Chemung</option>
+            <option>Chenango</option>
+            <option>Clinton</option>
+            <option>Columbia</option>
+            <option>Cortland</option>
+            <option>Delaware</option>
+            <option>Dutchess</option>
+            <option>Erie</option>
+            <option>Essex</option>
+            <option>Franklin</option>
+            <option>Fulton</option>
+            <option>Genesee</option>
+            <option>Greene</option>
+            <option>Hamilton</option>
+            <option>Herkimer</option>
+            <option>Jefferson</option>
+            <option>Kings</option>
+            <option>Lewis</option>
+            <option>Livingston</option>
+            <option>Madison </option>
+            <option>Monroe</option>
+            <option>Montgomery</option>
+            <option>Nassau</option>
+            <option>New York</option>
+            <option>Niagara</option>
+            <option>Oneida</option>
+            <option>Onondaga</option>
+            <option>Ontario </option>
+            <option>Orange</option>
+            <option>Orleans</option>
+            <option>Oswego</option>
+            <option>Otsego</option>
+            <option>Putnam</option>
+            <option>Queens</option>
+            <option>Rensselaer</option>
+            <option>Richmond</option>
+            <option>Rockland</option>
+            <option>Saint Lawrence</option>
+            <option>Saratoga</option>
+            <option>Schenectady</option>
+            <option>Schoharie</option>
+            <option>Schuyler</option>
+            <option>Seneca</option>
+            <option>Steuben</option>
+            <option>Suffolk</option>
+            <option>Sullivan</option>
+            <option>Tioga</option>
+            <option>Tompkins</option>
+            <option>Ulster</option>
+            <option>Warren</option>
+            <option>Washington</option>
+            <option>Wayne</option>
+            <option>Westchester</option>
+            <option>Wyoming</option>
+            <option>Yates</option>
+          </Input>
+
+          {/*Couldn't figure out padding for these reactsrap elements. This can be straightened out with CSS*/}
+          <p></p>
         </FormGroup>
+
+        {/* <FormGroup>
+                <Label>Edit Description</Label>
+                <Input 
+                    type="textarea" 
+                    name="description" 
+                    id="businessDescription" 
+                    onChange={(e) => {
+                            onChange(e);
+                        }}                
+                />
+                </FormGroup> */}
         <FormGroup>
           <Button>Submit</Button>
         </FormGroup>
