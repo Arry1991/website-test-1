@@ -23,9 +23,10 @@ const Sidebar = ({ isOpen, toggle }) => {
             {" "}
             About
           </SidebarLink>
-          <SidebarLink to='discover' onClick={toggle}>
-            Discover
-          </SidebarLink>
+          <SidebarMenuItem to='/BusinessMain' onClick={toggle}>
+            {" "}
+            Business{" "}
+          </SidebarMenuItem>
           <SidebarMenuItem to='/Business' onClick={toggle}>
             {" "}
             Check-In{" "}

@@ -11,3 +11,11 @@ h1 {
   font-weight: bold;
   text-align: center;
 }
+
+.suc {
+  color: green;
+}
+
+.fail {
+  color: red;
+}

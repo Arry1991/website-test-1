@@ -28,7 +28,7 @@ const Navbar = ({ toggle }) => {
               <NavLinks to='about'>Covid-19</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to='discover'>Map</NavLinks>
+              <NavMenuItem to='/BusinessMain'>Business</NavMenuItem>
             </NavItem>
             <NavItem>
               <NavMenuItem to='/Business'>Check-In</NavMenuItem>

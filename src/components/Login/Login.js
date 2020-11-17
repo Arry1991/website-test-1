@@ -12,6 +12,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState(null);
   const onChange = (e) => {
     setFormdata({ ...formData, [e.target.name]: e.target.value });
     console.log(formData);
@@ -31,11 +32,13 @@ const Login = (props) => {
       .then((res) => {
         console.log(res);
         props.authHandler(true);
+        setMessage("Successful Login");
         //Cookies.set("Token", res.data.token, { expires: 7 });
       })
       // if login failed do nothing
       .catch((err) => {
         console.log(err);
+        setMessage("Invalid Login");
         //props.authHandler(true); //REMOVE LATER
         // Cookies.set("Token", "8s6d9a87s98d69s7atd9sa7d9", { expires: 7 }); //REMOVE LATER
       });
@@ -66,6 +69,9 @@ const Login = (props) => {
         </FormGroup>
         <FormGroup>
           <Button>Submit</Button>
+          <p className={message === "Successful Login" ? "suc" : "fail"}>
+            {message}
+          </p>
         </FormGroup>
       </AvForm>
     </>

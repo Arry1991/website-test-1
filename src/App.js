@@ -13,6 +13,8 @@ import Home from "./pages";
 import Register from "./components/Register/Register";
 import Business from "./components/Business/Business";
 import Login from "./components/Login/Login";
+import BusinessInfo from "./components/Business/BusinessInfo";
+import BusinessMain from "./components/Business/BusinessMain";
 import axios from "axios";
 
 function App() {
@@ -71,6 +73,20 @@ function App() {
         </Route>
         <Route exact path='/Register' component={Register}></Route>
         {/* <Route exact path='/Login' component={Login} x={handleAuth} />  */}
+        <PrivateRoute
+          exact
+          path='/BusinessInfo'
+          component={BusinessInfo}
+          auth={auth}
+        />
+        <Route exact path='/BusinessInfo' component={BusinessInfo} />
+        <PrivateRoute
+          exact
+          path='/BusinessMain'
+          component={BusinessMain}
+          auth={auth}
+        />
+        <Route exact path='/BusinessMain' component={BusinessMain} />
       </Switch>
     </Router>
   );

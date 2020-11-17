@@ -1,28 +1,16 @@
 import React, { useState } from "react";
+import "./businessmain.css";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
 import axios from "axios";
-import "./register.css";
+import { Button, FormGroup, Label, Input } from "reactstrap";
 
-const Register = (props) => {
-  const [formData, setFormdata] = useState({
-    firstName: "",
-    lastName: "",
+const BusinessInfo = (props) => {
+  const [formData, setFormData] = useState({
     ownerEmail: "",
-    password: "",
-    businessName: "",
+    name: "",
     businessType: "",
-    businessEmail: "",
+    email: "",
     phone: "",
     url: "",
     street: "",
@@ -30,100 +18,54 @@ const Register = (props) => {
     zip: "",
     county: "",
   });
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-  const [message, setMessage] = useState("");
 
   const onChange = (e) => {
-    setFormdata({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(formData);
   };
+
+  // on Form Submit run this function
   const registerHandler = () => {
     let formData2 = new FormData();
-    formData2.append("firstName", formData.firstName);
-    formData2.append("lastName", formData.lastName);
+
     formData2.append("ownerEmail", formData.ownerEmail);
-    formData2.append("password", formData.password);
-    formData2.append("businessName", formData.businessName);
+    formData2.append("name", formData.name);
     formData2.append("businessType", formData.businessType);
-    formData2.append("businessEmail", formData.businessEmail);
+    formData2.append("email", formData.email);
     formData2.append("phone", formData.phone);
     formData2.append("url", formData.url);
     formData2.append("street", formData.street);
     formData2.append("town", formData.town);
     formData2.append("zip", formData.zip);
     formData2.append("county", formData.county);
-
     console.log("clicked");
 
-    const url = "/react-backend/registration.php";
-    axios
+    // set urls
+    const url = "/react-backend/business.php";
 
-      .post(url, formData2)
-      //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
-      // firstName: String(FormData.firstName),
-      // lastName: String(FormData.lastName),
-      // email: String(FormData.email),
-      // password: String(FormData.password),
-      // })
-      .then((res) => {
-        console.log(res);
-        setMessage("Successful");
-        toggle();
-      })
-      .catch((err) => {
-        console.log(err);
-        setMessage("Failed");
-        toggle();
-      });
+    // post business info data
+    axios.post(url, formData2).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
     <>
-      <h1>Register</h1>
+      <h1>Enter Business Info</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
-            label='First Name'
-            type='text'
-            name='firstName'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
-            label='Last Name'
-            type='text'
-            name='lastName'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
             label='Owner Email'
-            type='email'
+            type='text'
             name='ownerEmail'
             onChange={(e) => {
               onChange(e);
             }}
-            required
-          />
-          <AvField
-            type='password'
-            name='password'
-            label='Password'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
           />
           <AvField
             label='Business Name'
             type='text'
-            name='businessName'
+            name='name'
             onChange={(e) => {
               onChange(e);
             }}
@@ -153,7 +95,7 @@ const Register = (props) => {
           <AvField
             label='Business Email'
             type='email'
-            name='businessEmail'
+            name='email'
             onChange={(e) => {
               onChange(e);
             }}
@@ -213,7 +155,7 @@ const Register = (props) => {
               onChange(e);
             }}
           >
-            <option>Select the option</option>
+            <option>Select an option</option>
             <option>Albany</option>
             <option>Allegany</option>
             <option>Bronx</option>
@@ -293,12 +235,24 @@ const Register = (props) => {
                         }}                
                 />
                 </FormGroup> */}
+
         <FormGroup>
-          <Button>Submit</Button>
+          <ul>
+            <li>
+              {" "}
+              <Button color='success'>Submit</Button>{" "}
+            </li>
+            <li>
+              {" "}
+              <Button tag={Link} to='/BusinessMain'>
+                Back
+              </Button>{" "}
+            </li>
+          </ul>
         </FormGroup>
       </AvForm>
     </>
   );
 };
 
-export default Register;
+export default BusinessInfo;
