@@ -14,7 +14,6 @@ import "./business.css";
 
 const Business = (props) => {
   const [formData, setFormdata] = useState({
-    businessEmail: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -34,7 +33,6 @@ const Business = (props) => {
   };
   const registerHandler = () => {
     let formData2 = new FormData();
-    formData2.append("businessEmail", formData.businessEmail);
     formData2.append("firstName", formData.firstName);
     formData2.append("lastName", formData.lastName);
     formData2.append("email", formData.email);
@@ -66,7 +64,6 @@ const Business = (props) => {
 
   const registerHandler2 = () => {
     let formData3 = new FormData();
-    formData3.append("businessEmail", formData.businessEmail);
     formData3.append("dateOfCase", formData.dateOfCase);
     console.log("clicked");
 
@@ -97,15 +94,6 @@ const Business = (props) => {
       <h1>Sign in patrons</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
-          <AvField
-            label='Business Email'
-            type='text'
-            name='businessEmail'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
           <AvField
             label='First Name'
             type='text'
