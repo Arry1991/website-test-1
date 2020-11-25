@@ -10,8 +10,22 @@ import {
   SideBtnWrap,
   SidebarMenuItem,
 } from "./SidebarElements";
+import axios from "axios";
 
-const Sidebar = ({ isOpen, toggle }) => {
+const Sidebar = ({ isOpen, toggle, auth, handleAuth }) => {
+  const handleLogout = (e) => {
+    e.preventDefault();
+    //console.log("clicked");
+    //Cookies.remove("PHPSESSID");
+    const url = "/react-backend/logout.php";
+    axios
+      .get(url)
+      .then((res) => {
+        handleAuth(false);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -31,13 +45,21 @@ const Sidebar = ({ isOpen, toggle }) => {
             {" "}
             Check-In{" "}
           </SidebarMenuItem>
-          <SidebarMenuItem to='/Register' onClick={toggle}>
-            {" "}
-            Sign Up{" "}
-          </SidebarMenuItem>
+          {auth ? (
+            ""
+          ) : (
+            <SidebarMenuItem to='/Register' onClick={toggle}>
+              {" "}
+              Sign Up{" "}
+            </SidebarMenuItem>
+          )}
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to='/Login'>Sign In</SidebarRoute>
+          {auth ? (
+            <SidebarRoute onClick={handleLogout}>Log Out</SidebarRoute>
+          ) : (
+            <SidebarRoute to='/Login'>Sign In</SidebarRoute>
+          )}
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>

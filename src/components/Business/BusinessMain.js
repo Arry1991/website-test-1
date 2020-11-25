@@ -11,25 +11,26 @@ import axios from "axios";
 import "./businessmain.css";
 
 const BusinessMain = (props) => {
-  const url = "/react-backend/businessChart.php";
-  const [data, setData] = useState([]);
-
-  const [businessData, setBusinessData] = useState({
-    name: "McDonald's",
-    type: "Restaurant",
-    email: "joe@joespizza.com",
-    businessemail: "contact@joespizza.com",
-    phone: "5167554688",
-    address: "100 Pizza St",
-    zip: "11501",
-    description: "Big Old Burgers",
-  });
+  let businessInfoUrl = "/react-backend/editBusinessInfo.php";
+  let checkinUrl = "/react-backend/businessChart.php";
+  const [checkinData, setCheckinData] = useState([]);
+  const [businessData, setBusinessData] = useState([]);
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(checkinUrl)
       .then((json) => {
-        setData(json.data);
+        setCheckinData(json.data);
+        console.log(json.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .get(businessInfoUrl)
+      .then((json) => {
+        setBusinessData(json.data);
         console.log(json.data);
       })
       .catch((err) => {
@@ -51,14 +52,14 @@ const BusinessMain = (props) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((data) => {
+            {checkinData.map((checkinData) => {
               return (
-                <tr key={data}>
-                  <td>{data.first_name}</td>
-                  <td>{data.last_name}</td>
-                  <td>{data.temperature}</td>
-                  <td>{data.sheet_date}</td>
-                  <td>{data.email}</td>
+                <tr key={checkinData}>
+                  <td>{checkinData.first_name}</td>
+                  <td>{checkinData.last_name}</td>
+                  <td>{checkinData.temperature}</td>
+                  <td>{checkinData.sheet_date}</td>
+                  <td>{checkinData.email}</td>
                 </tr>
               );
             })}
@@ -79,22 +80,21 @@ const BusinessMain = (props) => {
             <ToastBody>
               <dl>
                 <dt>Address</dt>
-                <dd>{businessData.address}</dd>
-                <dd>{businessData.zip}</dd>
+                <dd>
+                  {businessData.street}, {businessData.town} {businessData.zip}
+                </dd>
                 <dt>Phone</dt>
-                <dd>{businessData.phone}</dd>
+                <dd>{businessData.business_phone}</dd>
                 <dt>Contact Email</dt>
-                <dd>{businessData.email}</dd>
-                <dt>Owner Email</dt>
-                <dd>{businessData.businessemail}</dd>
+                <dd>{businessData.business_email}</dd>
               </dl>
               <Link to='/BusinessInfo'>Edit Info</Link>
             </ToastBody>
           </Toast>
         </aside>
 
-        <h1>{businessData.name}</h1>
-        <h2>{businessData.description}</h2>
+        <h1>{businessData.business_name}</h1>
+        <h2>{businessData.business_type}</h2>
         <h3>Recent Check-ins</h3>
         <li>
           {" "}

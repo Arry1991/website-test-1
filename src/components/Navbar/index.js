@@ -12,9 +12,26 @@ import {
   NavLinks,
   NavBtn,
   NavBtnLink,
+  NavLogout,
 } from "./NavbarElements";
+import Cookies from "js-cookie";
+import axios from "axios";
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, auth, handleAuth }) => {
+  const handleLogout = (e) => {
+    e.preventDefault();
+    //console.log("clicked");
+    //Cookies.remove("PHPSESSID");
+    const url = "/react-backend/logout.php";
+    axios
+      .get(url)
+      .then((res) => {
+        handleAuth(false);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Nav>
@@ -31,14 +48,27 @@ const Navbar = ({ toggle }) => {
               <NavMenuItem to='/BusinessMain'>Business</NavMenuItem>
             </NavItem>
             <NavItem>
+              {auth ? (
+                <NavMenuItem to='/SelectBusiness'>
+                  Select/Add Business
+                </NavMenuItem>
+              ) : (
+                ""
+              )}
+            </NavItem>
+            <NavItem>
               <NavMenuItem to='/Business'>Check-In</NavMenuItem>
             </NavItem>
             <NavItem>
-              <NavMenuItem to='/Register'>Sign Up</NavMenuItem>
+              {auth ? "" : <NavMenuItem to='/Register'>Sign Up</NavMenuItem>}
             </NavItem>
           </NavMenu>
           <NavBtn>
-            <NavBtnLink to='/Login'>Sign In</NavBtnLink>
+            {auth ? (
+              <NavLogout onClick={handleLogout}>Log Out</NavLogout>
+            ) : (
+              <NavBtnLink to='/Login'>Sign In</NavBtnLink>
+            )}
           </NavBtn>
         </NavbarContainer>
       </Nav>

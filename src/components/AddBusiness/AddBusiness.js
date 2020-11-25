@@ -1,39 +1,29 @@
-import React, { useState } from "react";
+import React, {
+  List,
+  Component,
+  useState,
+  setState,
+  useEffect,
+  setData,
+} from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { Button, Label, Input, FormGroup } from "reactstrap";
 import axios from "axios";
-import "./register.css";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 
-const Register = (props) => {
+const AddBusiness = (props) => {
   const [formData, setFormdata] = useState({
-    firstName: "",
-    lastName: "",
-    ownerEmail: "",
-    password: "",
-    businessName: "",
-    businessType: "",
-    businessEmail: "",
+    name: "",
+    type: "",
+    email: "",
     phone: "",
-    url: "",
+    description: "",
     street: "",
     town: "",
     zip: "",
     county: "",
   });
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-  const [message, setMessage] = useState("");
 
   const onChange = (e) => {
     setFormdata({ ...formData, [e.target.name]: e.target.value });
@@ -41,15 +31,11 @@ const Register = (props) => {
   };
   const registerHandler = () => {
     let formData2 = new FormData();
-    formData2.append("firstName", formData.firstName);
-    formData2.append("lastName", formData.lastName);
-    formData2.append("ownerEmail", formData.ownerEmail);
-    formData2.append("password", formData.password);
-    formData2.append("businessName", formData.businessName);
-    formData2.append("businessType", formData.businessType);
-    formData2.append("businessEmail", formData.businessEmail);
+    formData2.append("name", formData.name);
+    formData2.append("type", formData.type);
+    formData2.append("email", formData.email);
     formData2.append("phone", formData.phone);
-    formData2.append("url", formData.url);
+    formData2.append("description", formData.description);
     formData2.append("street", formData.street);
     formData2.append("town", formData.town);
     formData2.append("zip", formData.zip);
@@ -57,7 +43,7 @@ const Register = (props) => {
 
     console.log("clicked");
 
-    const url = "/react-backend/registration.php";
+    const url = "/react-backend/addBusiness.php";
     axios
 
       .post(url, formData2)
@@ -69,61 +55,20 @@ const Register = (props) => {
       // })
       .then((res) => {
         console.log(res);
-        setMessage("Successful");
-        toggle();
       })
       .catch((err) => {
         console.log(err);
-        setMessage("Failed");
-        toggle();
       });
   };
-
   return (
     <>
-      <h1>Register</h1>
+      <h1>Add Business</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
-            label='First Name'
-            type='text'
-            name='firstName'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
-            label='Last Name'
-            type='text'
-            name='lastName'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
-            label='Owner Email'
-            type='email'
-            name='ownerEmail'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
-            type='password'
-            name='password'
-            label='Password'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
-          <AvField
             label='Business Name'
             type='text'
-            name='businessName'
+            name='name'
             onChange={(e) => {
               onChange(e);
             }}
@@ -132,8 +77,8 @@ const Register = (props) => {
           <Label>Business Type</Label>
           <Input
             type='select'
-            name='businessType'
-            id='businessType'
+            name='type'
+            id='type'
             onChange={(e) => {
               onChange(e);
             }}
@@ -153,7 +98,7 @@ const Register = (props) => {
           <AvField
             label='Business Email'
             type='email'
-            name='businessEmail'
+            name='email'
             onChange={(e) => {
               onChange(e);
             }}
@@ -171,7 +116,7 @@ const Register = (props) => {
           <AvField
             label='URL'
             type='url'
-            name='url'
+            name='description'
             onChange={(e) => {
               onChange(e);
             }}
@@ -203,7 +148,7 @@ const Register = (props) => {
             }}
           />
 
-          {/* List of Counties. To-Do: Hide this data in another file/make a helper function */}
+          {/* List of Cunties. To-Do: Hide this data in another file/make a helper function */}
           <Label>County</Label>
           <Input
             type='select'
@@ -283,16 +228,16 @@ const Register = (props) => {
         </FormGroup>
 
         {/* <FormGroup>
-                <Label>Edit Description</Label>
-                <Input 
-                    type="textarea" 
-                    name="description" 
-                    id="businessDescription" 
-                    onChange={(e) => {
-                            onChange(e);
-                        }}                
-                />
-                </FormGroup> */}
+                    <Label>Edit Description</Label>
+                    <Input 
+                        type="textarea" 
+                        name="description" 
+                        id="businessDescription" 
+                        onChange={(e) => {
+                                onChange(e);
+                            }}                
+                    />
+                    </FormGroup> */}
         <FormGroup>
           <Button>Submit</Button>
         </FormGroup>
@@ -301,4 +246,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default AddBusiness;

@@ -3,9 +3,8 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button, FormGroup, Label } from "reactstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
 import "./login.css";
-import { Router } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const Login = (props) => {
   const [formData, setFormdata] = useState({
@@ -43,6 +42,7 @@ const Login = (props) => {
         // Cookies.set("Token", "8s6d9a87s98d69s7atd9sa7d9", { expires: 7 }); //REMOVE LATER
       });
   };
+
   return (
     <>
       <h1>Login</h1>
@@ -72,6 +72,7 @@ const Login = (props) => {
           <p className={message === "Successful Login" ? "suc" : "fail"}>
             {message}
           </p>
+          {message && <Redirect to='/SelectBusiness' />}
         </FormGroup>
       </AvForm>
     </>
