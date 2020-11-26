@@ -37,10 +37,12 @@ const SelectBusiness = (props) => {
   };
 
   const selectedBusiness = (e) => {
+    //console.log("this is street" + business);
     const urlSelect = "/react-backend/selectBusiness.php";
     axios
-      .post(urlSelect, { email: business.email })
+      .post(urlSelect, { street: business })
       .then((res) => {
+        console.log("this is street" + business);
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -76,10 +78,10 @@ const SelectBusiness = (props) => {
                   <td>{AllBusinesses.zip}</td>
                   <td>{AllBusinesses.county}</td>
                   <input
-                    onClick={() => handleBusiness(AllBusinesses.name)}
+                    onClick={() => handleBusiness(AllBusinesses.street)}
                     type='radio'
-                    value='Business'
-                    name='Business'
+                    value='street'
+                    name='street'
                   />{" "}
                   Select this business
                 </tr>
@@ -90,24 +92,15 @@ const SelectBusiness = (props) => {
       </div>
     );
   };
-  const renderList = () => {
-    {
-      AllBusinesses.map((AllBusinesses) => {
-        return (
-          <List.Item block key={AllBusinesses}>
-            <List.Content>
-              {AllBusinesses.name} and {AllBusinesses.type}
-            </List.Content>
-          </List.Item>
-        );
-      });
-    }
-  };
+
   return (
     <>
       <h1>Select a business</h1>
       {renderTable()}
-      <Button color='success'>Select Business</Button> <p></p>
+      <Button onClick={() => selectedBusiness(business)} color='success'>
+        Select Business
+      </Button>{" "}
+      <p></p>
       <Button color='success' tag={Link} to='/AddBusiness'>
         Add Business
       </Button>{" "}
