@@ -7,26 +7,67 @@ import React, {
 } from "react";
 import { Link } from "react-router-dom";
 import { Table, Toast, ToastBody, ToastHeader, Button } from "reactstrap";
+import { MDBDataTable } from "mdbreact";
 import axios from "axios";
 import "./businessmain.css";
 
-const BusinessMain = (props) => {
-  let businessInfoUrl = "/react-backend/editBusinessInfo.php";
-  let checkinUrl = "/react-backend/businessChart.php";
-  const [checkinData, setCheckinData] = useState([]);
-  const [businessData, setBusinessData] = useState([]);
+const BusinessMain = () => {
+  // Business URL
+  let businessInfoUrl = "/react-backend/displayBusinessInfo.php";
+  // Patron URL
+  let checkinUrl = "/react-backend/displayCheckIn.php";
 
+  // Checkin Data from Patron Table. Named 'rows' so it works with MDBTable. TO DO: Rename it later so fetch call makes more sense
+  const [rows, setRows] = useState([]);
+  // Constant for Business Data
+  const [businessData, setBusinessData] = useState([]);
+  // Columns for checkin table
+  const columns = [
+    {
+      label: "First Name",
+      field: "first_name",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Last Name",
+      field: "last_name",
+      sort: "asc",
+      width: 270,
+    },
+    {
+      label: "Temperature",
+      field: "temperature",
+      sort: "asc",
+      width: 200,
+    },
+    {
+      label: "Date",
+      field: "sheet_date",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Email",
+      field: "email",
+      sort: "asc",
+      width: 150,
+    },
+  ];
+
+  // Runs on startup
   useEffect(() => {
+    // Fetch Checkin Data
     axios
       .get(checkinUrl)
       .then((json) => {
-        setCheckinData(json.data);
+        setRows(json.data);
         console.log(json.data);
       })
       .catch((err) => {
         console.log(err);
       });
-
+    // Fetch Business Info
     axios
       .get(businessInfoUrl)
       .then((json) => {
@@ -38,35 +79,11 @@ const BusinessMain = (props) => {
       });
   }, []);
 
+  // Merge columns + rows so it works with MDBDataTable
+  const tableData = { columns, rows };
+  // Render Table Function. Creates Sortable Table with MDB React
   const renderTable = () => {
-    return (
-      <div class={"t1"}>
-        <Table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Temperature</th>
-              <th>Date of Visit</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {checkinData.map((checkinData) => {
-              return (
-                <tr key={checkinData}>
-                  <td>{checkinData.first_name}</td>
-                  <td>{checkinData.last_name}</td>
-                  <td>{checkinData.temperature}</td>
-                  <td>{checkinData.sheet_date}</td>
-                  <td>{checkinData.email}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      </div>
-    );
+    return <MDBDataTable striped bordered data={tableData} />;
   };
 
   return (
@@ -84,17 +101,16 @@ const BusinessMain = (props) => {
                   {businessData.street}, {businessData.town} {businessData.zip}
                 </dd>
                 <dt>Phone</dt>
-                <dd>{businessData.business_phone}</dd>
+                <dd>{businessData.phone}</dd>
                 <dt>Contact Email</dt>
-                <dd>{businessData.business_email}</dd>
+                <dd>{businessData.email}</dd>
               </dl>
               <Link to='/BusinessInfo'>Edit Info</Link>
             </ToastBody>
           </Toast>
         </aside>
-
-        <h1>{businessData.business_name}</h1>
-        <h2>{businessData.business_type}</h2>
+        <h1>{businessData.name}</h1>
+        <h2>{businessData.type}</h2>
         <h3>Recent Check-ins</h3>
         <li>
           {" "}

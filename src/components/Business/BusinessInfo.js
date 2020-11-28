@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./businessmain.css";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button, FormGroup, Label, Input } from "reactstrap";
 
-const BusinessInfo = (props) => {
-  const [formData, setFormData] = useState({
-    ownerEmail: "",
-    name: "",
-    businessType: "",
-    email: "",
-    phone: "",
-    url: "",
-    street: "",
-    town: "",
-    zip: "",
-    county: "",
+const BusinessInfo = () => {
+  let url = "/react-backend/displayBusinessInfo.php";
+  const [formData, setFormData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((json) => {
+        //setFormData(json.data);
+        //console.log(json.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   const onChange = (e) => {
@@ -27,13 +29,11 @@ const BusinessInfo = (props) => {
   // on Form Submit run this function
   const registerHandler = () => {
     let formData2 = new FormData();
-
-    formData2.append("ownerEmail", formData.ownerEmail);
     formData2.append("name", formData.name);
-    formData2.append("businessType", formData.businessType);
+    formData2.append("type", formData.type);
     formData2.append("email", formData.email);
     formData2.append("phone", formData.phone);
-    formData2.append("url", formData.url);
+    formData2.append("description", formData.description);
     formData2.append("street", formData.street);
     formData2.append("town", formData.town);
     formData2.append("zip", formData.zip);
@@ -41,7 +41,7 @@ const BusinessInfo = (props) => {
     console.log("clicked");
 
     // set urls
-    const url = "/react-backend/business.php";
+    const url = "/react-backend/updateBusinessInfo.php";
 
     // post business info data
     axios.post(url, formData2).then((res) => {
@@ -55,17 +55,10 @@ const BusinessInfo = (props) => {
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
-            label='Owner Email'
-            type='text'
-            name='ownerEmail'
-            onChange={(e) => {
-              onChange(e);
-            }}
-          />
-          <AvField
             label='Business Name'
             type='text'
             name='name'
+            placeholder={formData.name}
             onChange={(e) => {
               onChange(e);
             }}
@@ -73,9 +66,10 @@ const BusinessInfo = (props) => {
 
           <Label>Business Type</Label>
           <Input
+            placeholder={formData.type}
             type='select'
-            name='businessType'
-            id='businessType'
+            name='type'
+            id='type'
             onChange={(e) => {
               onChange(e);
             }}
@@ -93,6 +87,7 @@ const BusinessInfo = (props) => {
           </Input>
 
           <AvField
+            placeholder={formData.email}
             label='Business Email'
             type='email'
             name='email'
@@ -102,6 +97,7 @@ const BusinessInfo = (props) => {
           />
 
           <AvField
+            placeholder={formData.phone}
             label='Phone Number'
             type='phone'
             name='phone'
@@ -111,14 +107,16 @@ const BusinessInfo = (props) => {
           />
 
           <AvField
+            placeholder={formData.description}
             label='URL'
             type='url'
-            name='url'
+            name='description'
             onChange={(e) => {
               onChange(e);
             }}
           />
           <AvField
+            placeholder={formData.street}
             label='Street Address'
             type='address'
             name='street'
@@ -128,6 +126,7 @@ const BusinessInfo = (props) => {
           />
 
           <AvField
+            placeholder={formData.town}
             label='Town'
             type='text'
             name='town'
@@ -137,6 +136,7 @@ const BusinessInfo = (props) => {
           />
 
           <AvField
+            placeholder={formData.zip}
             label='ZIP'
             type='text'
             name='zip'
@@ -148,6 +148,7 @@ const BusinessInfo = (props) => {
           {/* List of Cunties. To-Do: Hide this data in another file/make a helper function */}
           <Label>County</Label>
           <Input
+            placeholder={formData.county}
             type='select'
             name='county'
             id='county'
