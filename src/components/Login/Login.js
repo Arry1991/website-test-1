@@ -45,7 +45,7 @@ const Login = (props) => {
 
   return (
     <>
-      <h1>Login</h1>
+      <h1 class="heading">Login</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField

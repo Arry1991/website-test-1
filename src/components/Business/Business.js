@@ -91,7 +91,7 @@ const Business = (props) => {
 
   return (
     <>
-      <h1>Sign in patrons</h1>
+      <h1 class="heading">Sign in patrons</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField

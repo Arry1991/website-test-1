@@ -109,9 +109,8 @@ const BusinessMain = () => {
             </ToastBody>
           </Toast>
         </aside>
-        <h1>{businessData.name}</h1>
-        <h2>{businessData.type}</h2>
-        <h3>Recent Check-ins</h3>
+        <h1 class="heading">{businessData.type} - {businessData.name} </h1>
+        <h2>Recent Check-ins</h2>
         <li>
           {" "}
           <Button color='success' tag={Link} to='/Business'>

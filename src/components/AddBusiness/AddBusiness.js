@@ -62,7 +62,7 @@ const AddBusiness = (props) => {
   };
   return (
     <>
-      <h1>Add Business</h1>
+      <h1 class="heading">Add Business</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField

@@ -1,13 +1,29 @@
 .form {
+  padding-top: 20px;
   max-width: 50%;
   margin: auto;
 }
 
 .form label {
   font-weight: bold;
+  padding-top: 20px;
 }
 
-h1{
-    font-weight: bold;
-    text-align: center;
+.form input {
+  max-width: 90%;
+  font-weight: bold;
+  border-width: 2px;
+  border-color: #000000;
+}
+
+.heading {
+  padding-top: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form select {
+  max-width: 90%;
+  border-width: 2px;
+  border-color: #000000;
 }

@@ -51,7 +51,7 @@ const BusinessInfo = () => {
 
   return (
     <>
-      <h1>Enter Business Info</h1>
+      <h1 class="heading">Enter Business Info</h1>
       <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
