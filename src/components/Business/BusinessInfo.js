@@ -245,7 +245,7 @@ const BusinessInfo = () => {
             </li>
             <li>
               {" "}
-              <Button tag={Link} to='/BusinessMain'>
+              <Button color='success' tag={Link} to='/BusinessMain'>
                 Back
               </Button>{" "}
             </li>

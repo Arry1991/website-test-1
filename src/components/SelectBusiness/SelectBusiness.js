@@ -67,7 +67,7 @@ const SelectBusiness = (props) => {
               <th>County</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="tbdy ">
             {AllBusinesses.map((AllBusinesses) => {
               return (
                 <tr key={AllBusinesses}>

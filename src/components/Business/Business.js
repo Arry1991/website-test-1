@@ -141,7 +141,7 @@ const Business = (props) => {
           />
         </FormGroup>
         <FormGroup>
-          <Button>Submit</Button>
+          <Button color='success'>Submit</Button>
         </FormGroup>
       </AvForm>
       <AvForm className='form' onValidSubmit={registerHandler2}>
@@ -156,7 +156,7 @@ const Business = (props) => {
           />
         </FormGroup>
         <FormGroup>
-          <Button>Report</Button>
+          <Button color='success'>Report</Button>
         </FormGroup>
       </AvForm>
     </>
