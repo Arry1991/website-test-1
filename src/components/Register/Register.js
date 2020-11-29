@@ -294,7 +294,7 @@ const Register = (props) => {
                 />
                 </FormGroup> */}
         <FormGroup>
-          <Button>Submit</Button>
+          <Button color='success'>Submit</Button>
         </FormGroup>
       </AvForm>
     </>
