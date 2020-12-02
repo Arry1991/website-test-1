@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import { Link } from "react-router-dom";
 import {
   Button,
   FormGroup,
   Label,
+  Input,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
 import axios from "axios";
-import "./business.css";
+import "./patronregister.css";
 
-const Business = (props) => {
+const PatronRegister = (props) => {
   const [formData, setFormdata] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    date: "",
-    temp: "",
-    dateOfCase: "",
+    password: "",
   });
-
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -36,47 +35,20 @@ const Business = (props) => {
     formData2.append("firstName", formData.firstName);
     formData2.append("lastName", formData.lastName);
     formData2.append("email", formData.email);
-    formData2.append("date", formData.date);
-    formData2.append("temp", formData.temp);
+    formData2.append("password", formData.password);
+
     console.log("clicked");
 
-    const url = "/react-backend/patron.php";
+    const url = "/react-backend/patron/registration.php";
     axios
 
       .post(url, formData2)
       //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
-      //  firstName: String(FormData.firstName),
-      //  lastName: String(FormData.lastName),
-      //  email: String(FormData.email),
-      //  password: String(FormData.password),
-      //})
-      .then((res) => {
-        console.log(res);
-        setMessage("Successful");
-        toggle();
-      })
-      .catch((err) => {
-        console.log(err);
-        setMessage("Failed");
-        toggle();
-      });
-  };
-
-  const registerHandler2 = () => {
-    let formData3 = new FormData();
-    formData3.append("dateOfCase", formData.dateOfCase);
-    console.log("clicked");
-
-    const url2 = "/react-backend/notification.php";
-    axios
-
-      .post(url2, formData3)
-      //HERE URL WILL EQUAL BACKEND API LINK (POST API LINK.)
-      //  firstName: String(FormData.firstName),
-      //  lastName: String(FormData.lastName),
-      //  email: String(FormData.email),
-      //  password: String(FormData.password),
-      //})
+      // firstName: String(FormData.firstName),
+      // lastName: String(FormData.lastName),
+      // email: String(FormData.email),
+      // password: String(FormData.password),
+      // })
       .then((res) => {
         console.log(res);
         setMessage("Successful");
@@ -91,8 +63,9 @@ const Business = (props) => {
 
   return (
     <>
-      <h1>Sign in patrons</h1>
-      <AvForm className='formBusiness' onValidSubmit={registerHandler}>
+
+      <AvForm className='formPatron' onValidSubmit={registerHandler}>
+        <h1>Register as a patron</h1>
         <FormGroup>
           <AvField
             label='First Name'
@@ -122,45 +95,36 @@ const Business = (props) => {
             required
           />
           <AvField
-            type='date'
-            name='date'
-            label='Date'
+            type='password'
+            name='password'
+            label='Password'
             onChange={(e) => {
               onChange(e);
             }}
             required
           />
-          <AvField
-            label='Temperature'
-            type='text'
-            name='temp'
-            onChange={(e) => {
-              onChange(e);
-            }}
-            required
-          />
+
+          {/*Couldn't figure out padding for these reactsrap elements. This can be straightened out with CSS*/}
+          <p></p>
         </FormGroup>
+
+        {/* <FormGroup>
+                <Label>Edit Description</Label>
+                <Input 
+                    type="textarea" 
+                    name="description" 
+                    id="businessDescription" 
+                    onChange={(e) => {
+                            onChange(e);
+                        }}                
+                />
+                </FormGroup> */}
         <FormGroup>
           <Button>Submit</Button>
-        </FormGroup>
-      </AvForm>
-      <AvForm className='formBusiness' onValidSubmit={registerHandler2}>
-        <FormGroup>
-          <AvField
-            label='Date of Reported Case'
-            type='date'
-            name='dateOfCase'
-            onChange={(e) => {
-              onChange(e);
-            }}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Button>Report</Button>
         </FormGroup>
       </AvForm>
     </>
   );
 };
 
-export default Business;
+export default PatronRegister;

@@ -81,8 +81,9 @@ const Register = (props) => {
 
   return (
     <>
-      <h1 class="heading">Register</h1>
-      <AvForm className='form' onValidSubmit={registerHandler}>
+
+      <AvForm className='formRegister' onValidSubmit={registerHandler}>
+        <h1>Register as a business owner</h1>
         <FormGroup>
           <AvField
             label='First Name'
@@ -294,7 +295,7 @@ const Register = (props) => {
                 />
                 </FormGroup> */}
         <FormGroup>
-          <Button color='success'>Submit</Button>
+          <Button>Submit</Button>
         </FormGroup>
       </AvForm>
     </>

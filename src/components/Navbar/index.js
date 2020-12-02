@@ -60,7 +60,11 @@ const Navbar = ({ toggle, auth, handleAuth }) => {
               <NavMenuItem to='/Business'>Check-In</NavMenuItem>
             </NavItem>
             <NavItem>
-              {auth ? "" : <NavMenuItem to='/Register'>Sign Up</NavMenuItem>}
+              {auth ? (
+                ""
+              ) : (
+                <NavMenuItem to='/ChooseRegister'>Sign Up</NavMenuItem>
+              )}
             </NavItem>
           </NavMenu>
           <NavBtn>

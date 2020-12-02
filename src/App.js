@@ -18,6 +18,8 @@ import BusinessMain from "./components/Business/BusinessMain";
 import axios from "axios";
 import SelectBusiness from "./components/SelectBusiness/SelectBusiness";
 import AddBusiness from "./components/AddBusiness/AddBusiness";
+import ChooseRegister from "./components/ChooseRegister/ChooseRegister";
+import PatronRegister from "./components/PatronRegister/PatronRegister";
 
 function App() {
   // This runs right when the app starts (useEffect)
@@ -71,10 +73,12 @@ function App() {
         <Route exact path='/' component={Home} />
         <PrivateRoute exact path='/Business' component={Business} auth={auth} />
         <Route exact path='/Business' component={Business} />
+        <Route exact path='/ChooseRegister' component={ChooseRegister} />
         <Route exact path='/Login'>
           <Login authHandler={handleAuth} />
         </Route>
         <Route exact path='/Register' component={Register}></Route>
+        <Route exact path='/PatronRegister' component={PatronRegister}></Route>
         <Route exact path='/AddBusiness' component={AddBusiness}></Route>
         {/* <Route exact path='/Login' component={Login} x={handleAuth} />  */}
         <PrivateRoute

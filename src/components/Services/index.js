@@ -24,7 +24,7 @@ const Services = () => {
         </ServicesCard>
         <ServicesCard>
           <ServicesIcon src={Icon2} />
-          <ServicesH2>Access out Webstie</ServicesH2>
+          <ServicesH2>Access our Website</ServicesH2>
           <ServicesP>
             You can access our platform online anywhere in the world.
           </ServicesP>

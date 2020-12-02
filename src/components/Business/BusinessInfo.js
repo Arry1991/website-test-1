@@ -51,8 +51,8 @@ const BusinessInfo = () => {
 
   return (
     <>
-      <h1 class="heading">Enter Business Info</h1>
-      <AvForm className='form' onValidSubmit={registerHandler}>
+      <h1>Enter Business Info</h1>
+      <AvForm className='formBusinessInfo' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
             label='Business Name'
@@ -245,7 +245,7 @@ const BusinessInfo = () => {
             </li>
             <li>
               {" "}
-              <Button color='success' tag={Link} to='/BusinessMain'>
+              <Button tag={Link} to='/BusinessMain'>
                 Back
               </Button>{" "}
             </li>

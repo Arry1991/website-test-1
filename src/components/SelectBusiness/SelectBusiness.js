@@ -67,7 +67,7 @@ const SelectBusiness = (props) => {
               <th>County</th>
             </tr>
           </thead>
-          <tbody class="tbdy ">
+          <tbody>
             {AllBusinesses.map((AllBusinesses) => {
               return (
                 <tr key={AllBusinesses}>
@@ -95,7 +95,7 @@ const SelectBusiness = (props) => {
 
   return (
     <>
-      <h1 class="heading">Select a business</h1>
+      <h1>Select a business</h1>
       {renderTable()}
       <Button onClick={() => selectedBusiness(business)} color='success'>
         Select Business

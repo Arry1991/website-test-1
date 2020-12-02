@@ -62,8 +62,8 @@ const AddBusiness = (props) => {
   };
   return (
     <>
-      <h1 class="heading">Add Business</h1>
-      <AvForm className='form' onValidSubmit={registerHandler}>
+      <h1>Add Business</h1>
+      <AvForm className='formAddBusiness' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
             label='Business Name'
@@ -143,6 +143,8 @@ const AddBusiness = (props) => {
             label='ZIP'
             type='text'
             name='zip'
+            minLength='5'
+            maxLength='5'
             onChange={(e) => {
               onChange(e);
             }}
@@ -239,7 +241,7 @@ const AddBusiness = (props) => {
                     />
                     </FormGroup> */}
         <FormGroup>
-          <Button color='success'>Submit</Button>
+          <Button>Submit</Button>
         </FormGroup>
       </AvForm>
     </>

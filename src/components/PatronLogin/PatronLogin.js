@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import "./login.css";
 import { Redirect } from "react-router-dom";
 
+
 const Login = (props) => {
   const [formData, setFormdata] = useState({
     email: "",
@@ -24,7 +25,7 @@ const Login = (props) => {
     console.log("clicked");
 
     // send login details to database
-    const url = "/react-backend/owner/verificationLogin.php";
+    const url = "/react-backend/patron/verificationLogin.php";
     axios
       .post(url, formData2)
       // if login details sucessful make auth true and save cookieafafs
@@ -45,9 +46,8 @@ const Login = (props) => {
 
   return (
     <>
-
-      <AvForm className='formLogin' onValidSubmit={registerHandler}>
-        <h1>Login</h1>
+      <h1 class="heading">Login</h1>
+      <AvForm className='form' onValidSubmit={registerHandler}>
         <FormGroup>
           <AvField
             label='Email'
@@ -69,7 +69,7 @@ const Login = (props) => {
           />
         </FormGroup>
         <FormGroup>
-          <Button>Submit</Button>
+          <Button color='success' >Submit</Button>
           <p className={message === "Successful Login" ? "suc" : "fail"}>
             {message}
           </p>
